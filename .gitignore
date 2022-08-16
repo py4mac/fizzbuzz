@@ -1,0 +1,11 @@
+# folders
+.vscode
+.idea
+
+# coverage
+*.out
+*.txt
+
+# miscellanous
+.env
+config.yml
