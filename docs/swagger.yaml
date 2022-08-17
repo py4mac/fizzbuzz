@@ -1,0 +1,78 @@
+definitions:
+  dto.Statistics:
+    properties:
+      hits:
+        type: integer
+      int1:
+        description: Int1  int    `form:"int1" json:"int1" binding:"required,gte=1,lte=100,gtfield=Int2"`
+          /*  */
+        type: integer
+      int2:
+        type: integer
+      limit:
+        type: integer
+      str1:
+        type: string
+      str2:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /api/v1/fizzbuzz:
+    get:
+      consumes:
+      - application/json
+      description: Record fizzbuzz handler
+      parameters:
+      - description: Integer1
+        in: formData
+        name: int1
+        required: true
+        type: integer
+      - description: Integer2
+        in: formData
+        name: int2
+        required: true
+        type: integer
+      - description: Limit
+        in: formData
+        name: limit
+        required: true
+        type: integer
+      - description: String1
+        in: formData
+        name: str1
+        required: true
+        type: string
+      - description: String2
+        in: formData
+        name: str2
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              type: string
+            type: array
+      summary: Record
+      tags:
+      - v1
+  /api/v1/stats:
+    get:
+      description: Process status handler
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Statistics'
+      summary: Process
+      tags:
+      - v1
+swagger: "2.0"

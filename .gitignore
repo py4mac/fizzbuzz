@@ -1,6 +1,7 @@
 # folders
 .vscode
 .idea
+pgdata
 
 # coverage
 *.out
@@ -8,4 +9,4 @@
 
 # miscellanous
 .env
-config.yml
+config.yaml

@@ -15,7 +15,7 @@ COPY . .
 # Build
 RUN  go build    \
     -ldflags="-X 'github.com/py4mac/fizzbuzz/pkg/config.Version=${VERSION}' -X 'github.com/py4mac/fizzbuzz/pkg/config.Revision=${VCS_REF}' -X 'github.com/py4mac/fizzbuzz/pkg/config.Built=${BUILD_DATE}'" \
-    -a -o  fizzbuzz main.go
-RUN chown 1001:1001 fizzbuzz
+    -a -o  /fizzbuzz /app/cmd/main.go
+RUN chown 1001:1001 /fizzbuzz
 
-ENTRYPOINT ["/app/fizzbuzz"]
+ENTRYPOINT ["/fizzbuzz"]

@@ -43,4 +43,5 @@ issues:
         - gosec
 run:
   issues-exit-code: 1
-
+  skip-dirs:
+    - pgdata
