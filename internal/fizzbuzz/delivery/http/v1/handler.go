@@ -43,7 +43,7 @@ func (h v1Handlers) Record() echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
 
-		response, err := h.uc.Record(ctx, *n)
+		response, err := h.uc.Record(ctx, n)
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, err.Error())
 		}

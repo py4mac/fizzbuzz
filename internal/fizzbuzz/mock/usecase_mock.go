@@ -51,7 +51,7 @@ func (mr *MockUseCaseMockRecorder) Process(ctx interface{}) *gomock.Call {
 }
 
 // Record mocks base method.
-func (m *MockUseCase) Record(ctx context.Context, e domain.Fizzbuz) (string, error) {
+func (m *MockUseCase) Record(ctx context.Context, e *domain.Fizzbuz) (string, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Record", ctx, e)
 	ret0, _ := ret[0].(string)

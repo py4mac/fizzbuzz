@@ -19,7 +19,7 @@ func TestFbUC_Record(t *testing.T) {
 	mockFbRepo := mock.NewMockRepository(ctrl)
 	fbUC := NewFBUseCase(mockFbRepo)
 
-	fb := domain.Fizzbuz{
+	fb := &domain.Fizzbuz{
 		Int1:  3,
 		Int2:  5,
 		Limit: 10,

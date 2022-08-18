@@ -9,6 +9,6 @@ import (
 
 // Repository holds repositories interface
 type Repository interface {
-	Record(ctx context.Context, e domain.Fizzbuz) (string, error)
+	Record(ctx context.Context, e *domain.Fizzbuz) (string, error)
 	Process(ctx context.Context) (*domain.Statistics, error)
 }

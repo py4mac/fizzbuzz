@@ -9,6 +9,6 @@ import (
 
 // UseCase holds use cases interface
 type UseCase interface {
-	Record(ctx context.Context, e domain.Fizzbuz) (string, error)
+	Record(ctx context.Context, e *domain.Fizzbuz) (string, error)
 	Process(ctx context.Context) (*domain.Statistics, error)
 }

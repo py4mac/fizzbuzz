@@ -20,7 +20,7 @@ func NewFBUseCase(repo fizzbuzz.Repository) fizzbuzz.UseCase {
 }
 
 // Record fizzbuzz user entry inside persistent repository
-func (u *fbUC) Record(ctx context.Context, e domain.Fizzbuz) (string, error) {
+func (u *fbUC) Record(ctx context.Context, e *domain.Fizzbuz) (string, error) {
 	span, ctx := opentracing.StartSpanFromContext(ctx, "fbUC.Record")
 	defer span.Finish()
 

@@ -23,7 +23,7 @@ func TestFbRepo_Record(t *testing.T) {
 		str2 := "buzz"
 		mock.ExpectExec(regexp.QuoteMeta(insertRecord)).WillReturnResult(sqlmock.NewResult(1, 1))
 
-		fb := domain.Fizzbuz{
+		fb := &domain.Fizzbuz{
 			Int1:  int1,
 			Int2:  int2,
 			Limit: limit,

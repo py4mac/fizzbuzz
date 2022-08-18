@@ -17,7 +17,7 @@ func NewFBInPg(db *sqlx.DB) fizzbuzz.Repository {
 	return &fbInPg{db: db}
 }
 
-func (f *fbInPg) Record(ctx context.Context, e domain.Fizzbuz) (string, error) {
+func (f *fbInPg) Record(ctx context.Context, e *domain.Fizzbuz) (string, error) {
 	if _, err := f.db.ExecContext(
 		ctx,
 		insertRecord,
