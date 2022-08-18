@@ -16,10 +16,10 @@ test: lint
 	go tool cover -func coverage.txt | grep total
 
 # ==============================================================================
-# Doc
+# Doc go install golang.org/x/tools/cmd/godoc@latest
 
 doc:
-	$(info http://localhost:6060/pkg/github.com/py4mac/fizzbuzz)
+	$(info http://localhost:6060/pkg/github.com/py4mac/fizzbuzz?m=all)
 	godoc -http=:6060
 
 # ==============================================================================

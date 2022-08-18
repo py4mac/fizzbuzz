@@ -1,3 +1,4 @@
+// Package constants holds applicative constants
 package constants
 
 const (

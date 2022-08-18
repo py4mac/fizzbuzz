@@ -1,3 +1,4 @@
+// Package postgres initialize postgres connection
 package postgres
 
 import (

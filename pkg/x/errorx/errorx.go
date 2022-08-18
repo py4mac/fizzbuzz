@@ -1,3 +1,4 @@
+// Package errorx holds custom error definition
 package errorx
 
 import (

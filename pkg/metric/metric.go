@@ -1,3 +1,4 @@
+// Package metrics holds applicative metrics implementation
 package metric
 
 // Metrics holds applicative interface for the metrics

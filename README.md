@@ -40,6 +40,7 @@ The following tools are required to be installed on local machine.
 [Swag](https://github.com/swaggo/swag) for generating swagger documentation<br/>
 [Migrate](https://github.com/golang-migrate/migrate) for database migrations<br/>
 [Mock](https://github.com/golang/mock) for mocking<br/>
+[Godoc](https://github.com/golang/mock) for generating live documentation, to install it run `❯ go install golang.org/x/tools/cmd/godoc@latest`<br/>
 
 ## Other stacks
 
@@ -163,6 +164,14 @@ and database migration script
 # Services availables
 
 Once production containers are started, the same services are started with the API. The same endpoints are also availables.
+
+# Source code documentaiton
+
+An other command is available to explore live documentation
+
+```sh
+❯ make doc
+```
 
 # TODO
 

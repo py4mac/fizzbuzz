@@ -1,3 +1,4 @@
+// Package config defined function to load yaml configuration file
 package config
 
 import (
@@ -22,6 +23,7 @@ func LookupEnvOrString(key string, defaultVal string) string {
 	return defaultVal
 }
 
+// init predefined flag for passing configuration file
 func init() {
 	flag.StringVar(&configPath, "config", LookupEnvOrString("CONFIG", "/data/etc/config.yaml"), "Fizzbuzz microservice config path")
 }

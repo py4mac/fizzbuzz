@@ -1,3 +1,4 @@
+// Package main is the applicative entry point
 package main
 
 import (
