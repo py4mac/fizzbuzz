@@ -11,7 +11,7 @@ services:
     environment:
       - CONFIG=config.yaml
     ports:
-      - "7070:7070"
+      - "8080:8080"
       - "8000:8000"
     depends_on:
       - postgres

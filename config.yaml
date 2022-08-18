@@ -4,12 +4,12 @@ server:
   WriteTimeout: 5
 
 postgres:
-  PostgresqlHost: postgres
-  PostgresqlPort: 5432
-  PostgresqlUser: postgres
-  PostgresqlPassword: admin
-  PostgresqlDbname: fizzbuzz
-  PostgresqlSslmode: false
+  Host: postgres
+  Port: 5432
+  User: postgres
+  Password: admin
+  Dbname: fizzbuzz
+  Sslmode: false
   PgDriver: pgx
 
 metrics:
@@ -19,4 +19,3 @@ metrics:
 jaeger:
   Host: api:6831
   ServiceName: fuzzbuzz
-  LogSpans: false

@@ -12,11 +12,11 @@ import (
 // NewPsqlDB returns a new Postgresql db instance
 func NewPsqlDB(c *config.Config) (*sqlx.DB, error) {
 	dataSourceName := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s",
-		c.Postgres.PostgresqlHost,
-		c.Postgres.PostgresqlPort,
-		c.Postgres.PostgresqlUser,
-		c.Postgres.PostgresqlDbname,
-		c.Postgres.PostgresqlPassword,
+		c.Postgres.Host,
+		c.Postgres.Port,
+		c.Postgres.User,
+		c.Postgres.Dbname,
+		c.Postgres.Password,
 	)
 
 	db, err := sqlx.Connect(c.Postgres.PgDriver, dataSourceName)

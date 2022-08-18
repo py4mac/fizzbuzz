@@ -59,7 +59,7 @@ func main() {
 			Param: 1,
 		},
 		Reporter: &jaegercfg.ReporterConfig{
-			LogSpans:           cfg.Jaeger.LogSpans,
+			LogSpans:           false,
 			LocalAgentHostPort: cfg.Jaeger.Host,
 		},
 	}

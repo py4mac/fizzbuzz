@@ -43,13 +43,13 @@ type ServerConfig struct {
 
 // PostgresConfig is postgres configuration structure
 type PostgresConfig struct {
-	PostgresqlHost     string
-	PostgresqlPort     string
-	PostgresqlUser     string
-	PostgresqlPassword string
-	PostgresqlDbname   string
-	PostgresqlSSLMode  bool
-	PgDriver           string
+	Host     string
+	Port     string
+	User     string
+	Password string
+	Dbname   string
+	SSLMode  bool
+	PgDriver string
 }
 
 // Metrics is prometheus configuration structure
@@ -62,7 +62,6 @@ type Metrics struct {
 type Jaeger struct {
 	Host        string
 	ServiceName string
-	LogSpans    bool
 }
 
 // InitConfig loads yaml configuration file

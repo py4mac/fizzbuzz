@@ -1,7 +1,6 @@
 # folders
 .vscode
 .idea
-pgdata
 
 # coverage
 *.out
