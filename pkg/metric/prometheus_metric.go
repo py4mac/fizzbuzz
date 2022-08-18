@@ -1,7 +1,6 @@
 package metric
 
 import (
-	"log"
 	"strconv"
 
 	"github.com/labstack/echo/v4"
@@ -80,10 +79,10 @@ func CreateMetrics(address, name string) (Metrics, error) {
 		router := echo.New()
 		router.HideBanner = true
 		router.GET("/metrics", echo.WrapHandler(promhttp.Handler()))
-		log.Printf("Metrics server is running on port: %s", address)
+		logger.Printf("Metrics server is running on port: %s", address)
 
 		if err := router.Start(address); err != nil {
-			log.Fatal(err)
+			logger.Fatal(err)
 		}
 	}()
 
