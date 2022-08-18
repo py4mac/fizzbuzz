@@ -185,7 +185,7 @@ An other command is available to explore live documentation
 - [] Documentation
   - [x] Cleanup readme.md
   - [] Code cleanup
-  - [] Godoc internal?
+  - [x] Godoc internal?
 - [] Build
   - [] Cleanup golangci linter
   - [] Remove Jaeger?
