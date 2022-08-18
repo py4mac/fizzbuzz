@@ -45,10 +45,10 @@ The following tools are required to be installed on local machine.
 
 These other stacks are already pre-installed inside differents containers. No installation is required here, it's just for information.
 
-[PostgeSQL](https://github.com/jackc/pgx) as fizzbuzz user request store<br/>
-[Jaeger](https://www.jaegertracing.io/) open source, end-to-end distributed [tracing](https://opentracing.io/)<br/>
+[PostgreSQL](https://github.com/jackc/pgx) as fizzbuzz persistent store<br/>
+[Jaeger](https://www.jaegertracing.io/) for tracing (https://opentracing.io/)<br/>
 [Prometheus](https://prometheus.io/) monitoring and alerting<br/>
-[Grafana](https://grafana.com/) for to compose observability dashboards with everything from Prometheus<br/>
+[Grafana](https://grafana.com/) to expose dashboards collecting Prometheus metrics<br/>
 [Echo](https://github.com/labstack/echo) web framework<br/>
 
 ## Getting Started
@@ -151,7 +151,7 @@ http://localhost:3000/d/3bB90wi4z/fuzzbuzz
 ### Run production containers
 
 ```sh
-❯ make run
+❯ make start_prod
 ```
 
 and database migration script
