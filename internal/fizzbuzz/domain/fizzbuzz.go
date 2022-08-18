@@ -17,7 +17,7 @@ var (
 	ErrFizzbuzzIntsMustBePositive       = errors.New("int1 and int2 must be positives")
 	ErrFizzbuzzInt2MustBeHigherThanInt1 = errors.New("int2 must be higher than int1")
 	ErrFizzbuzzLimitMustBePositive      = errors.New("limit must be positive")
-	ErrFizzbuzzLimitExceeded            = errors.New("limit must be below or equal 100")
+	ErrFizzbuzzLimitExceeded            = fmt.Errorf("limit must be below or equal %d", MaxLimit)
 )
 
 // FizzbuzReq holds query parameters for the rest endpoint

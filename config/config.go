@@ -2,13 +2,14 @@
 package config
 
 import (
+	"errors"
 	"flag"
 	"os"
 	"path/filepath"
 	"strings"
 	"time"
 
-	"github.com/pkg/errors"
+	"github.com/py4mac/fizzbuzz/pkg/x/errorx"
 	"github.com/spf13/viper"
 )
 
@@ -84,11 +85,11 @@ func InitConfig() (*Config, error) {
 	viper.AutomaticEnv()
 
 	if err := viper.ReadInConfig(); err != nil {
-		return nil, errors.Wrap(err, "viper.ReadInConfig")
+		return nil, errorx.Wrap(err, "viper.ReadInConfig")
 	}
 
 	if err := viper.Unmarshal(cfg); err != nil {
-		return nil, errors.Wrap(err, "viper.Unmarshal")
+		return nil, errorx.Wrap(err, "viper.Unmarshal")
 	}
 
 	return cfg, nil
