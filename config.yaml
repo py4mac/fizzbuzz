@@ -9,7 +9,6 @@ postgres:
   User: postgres
   Password: admin
   Dbname: fizzbuzz
-  Sslmode: false
   PgDriver: pgx
 
 metrics:

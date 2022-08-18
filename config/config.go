@@ -48,7 +48,6 @@ type PostgresConfig struct {
 	User     string
 	Password string
 	Dbname   string
-	SSLMode  bool
 	PgDriver string
 }
 
