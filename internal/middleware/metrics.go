@@ -8,7 +8,7 @@ import (
 	"github.com/py4mac/fizzbuzz/pkg/metric"
 )
 
-// Prometheus metrics middleware
+// MetricsMiddleware store into prometheus http call status
 func (mw *Manager) MetricsMiddleware(metrics metric.Metrics) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {

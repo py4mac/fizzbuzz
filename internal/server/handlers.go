@@ -30,7 +30,6 @@ func (s *Server) MapHandlers(e *echo.Echo) error {
 	)
 
 	// Init repositories
-	// fbRepo := repository.NewFBInMemory()
 	fbRepo := repository.NewFBInPg(s.db)
 
 	// Init useCases
@@ -53,11 +52,7 @@ func (s *Server) MapHandlers(e *echo.Echo) error {
 		AllowOrigins: []string{"*"},
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 	}))
-	// e.Use(middleware.RecoverWithConfig(middleware.RecoverConfig{
-	// 	StackSize:         1 << 10, // 1 KB
-	// 	DisablePrintStack: true,
-	// 	DisableStackAll:   true,
-	// }))
+
 	e.Use(mw.MetricsMiddleware(metrics))
 
 	apiV1 := e.Group("/api/v1")

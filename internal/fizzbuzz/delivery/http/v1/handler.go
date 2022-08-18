@@ -26,7 +26,7 @@ func NewV1Handlers(uc fizzbuzz.UseCase) fizzbuzz.Handlers {
 // @Tags v1
 // @Accept json
 // @Produce json
-// @Success 200 {object} []string
+// @Success 200 {object} string
 // @Param int1 formData int true "Integer1" 1
 // @Param int2 formData int true "Integer2" 1
 // @Param limit formData int true "Limit" 100
@@ -45,7 +45,7 @@ func (h v1Handlers) Record() echo.HandlerFunc {
 
 		response, err := h.uc.Record(ctx, *n)
 		if err != nil {
-			return c.JSON(http.StatusBadRequest, err.Error())
+			return c.JSON(http.StatusInternalServerError, err.Error())
 		}
 
 		return c.JSON(http.StatusOK, response)
@@ -57,7 +57,7 @@ func (h v1Handlers) Record() echo.HandlerFunc {
 // @Description Process status handler
 // @Tags v1
 // @Produce json
-// @Success 200 {object} dto.Statistics
+// @Success 200 {object} domain.Statistics
 // @Router /api/v1/stats [get]
 func (h v1Handlers) Process() echo.HandlerFunc {
 	return func(c echo.Context) error {
@@ -68,7 +68,7 @@ func (h v1Handlers) Process() echo.HandlerFunc {
 
 		response, err := h.uc.Process(ctx)
 		if err != nil {
-			return c.JSON(http.StatusBadRequest, err.Error())
+			return c.JSON(http.StatusInternalServerError, err.Error())
 		}
 
 		return c.JSON(http.StatusOK, response)

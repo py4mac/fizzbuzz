@@ -6,6 +6,7 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/py4mac/fizzbuzz/internal/fizzbuzz"
 	"github.com/py4mac/fizzbuzz/internal/fizzbuzz/domain"
+	"github.com/py4mac/fizzbuzz/pkg/x/errorx"
 )
 
 type fbInPg struct {
@@ -16,7 +17,7 @@ func NewFBInPg(db *sqlx.DB) fizzbuzz.Repository {
 	return &fbInPg{db: db}
 }
 
-func (f *fbInPg) Record(ctx context.Context, e domain.Fizzbuz) ([]string, error) {
+func (f *fbInPg) Record(ctx context.Context, e domain.Fizzbuz) (string, error) {
 	if _, err := f.db.ExecContext(
 		ctx,
 		insertRecord,
@@ -26,7 +27,7 @@ func (f *fbInPg) Record(ctx context.Context, e domain.Fizzbuz) ([]string, error)
 		e.Str1,
 		e.Str2,
 	); err != nil {
-		return nil, err
+		return "", errorx.Wrap(err, "db record error")
 	}
 
 	return e.Process(ctx)
@@ -39,8 +40,8 @@ func (f *fbInPg) Process(ctx context.Context) (*domain.Statistics, error) {
 
 	var count int
 
-	if err := f.db.QueryRowContext(ctx, getStats).Scan(&count, &int1, &int2, &limit, &str1, &str2); err != nil {
-		return nil, err
+	if err := f.db.QueryRowContext(ctx, getStats).Scan(&int1, &int2, &limit, &str1, &str2, &count); err != nil {
+		return nil, errorx.Wrap(err, "db process error")
 	}
 
 	return &domain.Statistics{

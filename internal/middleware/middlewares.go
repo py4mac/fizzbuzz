@@ -9,7 +9,7 @@ type Manager struct {
 	cfg *config.Config
 }
 
-// NewMiddlewareManager manager constructor
+// NewMiddlewareManager create a new middleware manager
 func NewMiddlewareManager(cfg *config.Config) *Manager {
 	return &Manager{cfg: cfg}
 }

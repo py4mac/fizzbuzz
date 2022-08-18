@@ -19,15 +19,15 @@ func NewFBUseCase(repo fizzbuzz.Repository) fizzbuzz.UseCase {
 	return &fbUC{repo: repo}
 }
 
-// Record
-func (u *fbUC) Record(ctx context.Context, e domain.Fizzbuz) ([]string, error) {
+// Record fizzbuzz user entry inside persistent repository
+func (u *fbUC) Record(ctx context.Context, e domain.Fizzbuz) (string, error) {
 	span, ctx := opentracing.StartSpanFromContext(ctx, "fbUC.Record")
 	defer span.Finish()
 
 	return u.repo.Record(ctx, e)
 }
 
-// Process
+// Process fizzbuzz statistics
 func (u *fbUC) Process(ctx context.Context) (*domain.Statistics, error) {
 	span, ctx := opentracing.StartSpanFromContext(ctx, "fbUC.Process")
 	defer span.Finish()

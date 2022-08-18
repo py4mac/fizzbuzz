@@ -1,5 +1,9 @@
 ARG GOVERSION=1.19
-FROM golang:$GOVERSION-alpine
+FROM golang:$GOVERSION-alpine as builder
+ARG GOVERSION=1.19
+ARG REVISION
+ARG BUILD_DATE
+ARG VERSION
 
 RUN apk add build-base
 
@@ -14,8 +18,15 @@ COPY . .
 
 # Build
 RUN  go build    \
-    -ldflags="-X 'github.com/py4mac/fizzbuzz/pkg/config.Version=${VERSION}' -X 'github.com/py4mac/fizzbuzz/pkg/config.Revision=${VCS_REF}' -X 'github.com/py4mac/fizzbuzz/pkg/config.Built=${BUILD_DATE}'" \
-    -a -o  /fizzbuzz /app/cmd/main.go
-RUN chown 1001:1001 /fizzbuzz
+    -ldflags="-X 'github.com/py4mac/fizzbuzz/pkg/constants.Version=${VERSION}' -X 'github.com/py4mac/fizzbuzz/pkg/constants.Revision=${REVISION}' -X 'github.com/py4mac/fizzbuzz/pkg/constants.Built=${BUILD_DATE}'" \
+    -a -o  fizzbuzz /app/cmd/main.go
+RUN chown 1001:1001 fizzbuzz
 
-ENTRYPOINT ["/fizzbuzz"]
+
+FROM alpine
+WORKDIR /app
+COPY --from=builder /app/fizzbuzz .
+USER 1001:1001
+
+RUN ls /app
+ENTRYPOINT ["/app/fizzbuzz"]

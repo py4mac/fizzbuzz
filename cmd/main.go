@@ -20,7 +20,7 @@ import (
 // @description Fizzbuzz REST API
 // @contact.name Pierre-Yves BOISBUNON
 // @contact.url https://github.com/py4mac
-// @contact.email pierre-yves.boisbunon@gmail.com
+// @contact.email pierreyves.boisbunon@gmail.com
 // @BasePath /api/v1
 func main() {
 	log.SetFormatter(&log.JSONFormatter{})

@@ -1,12 +1,12 @@
 package repository
 
 const (
-	insertRecord = `INSERT INTO fizzbuzz.stats(int1, int2, max_limit, str1, str2, created_at) 
-					VALUES ($1, $2, $3, $4, $5, now());`
+	insertRecord = `INSERT INTO fizzbuzz.stats(int1, int2, max_limit, str1, str2) 
+					VALUES ($1, $2, $3, $4, $5);`
 	getStats = `
-					SELECT COUNT(*) AS hits, int1, int2, max_limit, str1, str2 
+					SELECT int1, int2, max_limit, str1, str2, COUNT(*) AS count
 					FROM fizzbuzz.stats
 					GROUP BY int1, int2, max_limit, str1, str2
-					ORDER BY hits DESC
+					ORDER BY count DESC
 					LIMIT 1;`
 )

@@ -33,18 +33,31 @@ swagger:
 # Run
 
 run:
-	go run ./cmd/main.go --config=./config.yaml
+	echo "Running application"
+	go run ./cmd/main.go --config=./config.local.yaml
 
 
 # ==============================================================================
 # Docker compose commands
 
-develop:
-	echo "Starting docker environment"
-	docker-compose -f docker-compose.dev.yml up --build
+start_local:
+	echo "Starting docker local environment"
+	docker-compose -f docker-compose.local.yml up -d
+
+stop_local:
+	echo "Stopping docker local environment"
+	docker-compose -f docker-compose.local.yml stop
+
+start_prod:
+	echo "Starting docker production environment"
+	docker-compose -f docker-compose.yml up --build -d
+
+stop_prod:
+	echo "Stopping docker production environment"
+	docker-compose -f docker-compose.yml stop
 
 # ==============================================================================
-# Go migrate eduterm-pgql https://github.com/golang-migrate/migrate
+# Go migrate https://github.com/golang-migrate/migrate
 
 DB_NAME = fizzbuzz
 DB_HOST = localhost

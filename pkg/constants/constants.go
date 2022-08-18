@@ -1,12 +1,12 @@
 package constants
 
-var (
+const (
 	// Version microservice version
-	Version = "1.0.0"
+	Version = ""
 
 	// Revision git commit
-	Revision = "0xdedbeaf"
+	Revision = ""
 
 	// Built Date built
-	Built = "17/08/2022"
+	Built = ""
 )

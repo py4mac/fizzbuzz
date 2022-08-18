@@ -51,10 +51,10 @@ func (mr *MockRepositoryMockRecorder) Process(ctx interface{}) *gomock.Call {
 }
 
 // Record mocks base method.
-func (m *MockRepository) Record(ctx context.Context, e domain.Fizzbuz) ([]string, error) {
+func (m *MockRepository) Record(ctx context.Context, e domain.Fizzbuz) (string, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Record", ctx, e)
-	ret0, _ := ret[0].([]string)
+	ret0, _ := ret[0].(string)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

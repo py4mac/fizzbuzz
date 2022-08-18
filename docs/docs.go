@@ -70,10 +70,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
+                            "type": "string"
                         }
                     }
                 }
@@ -93,7 +90,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/dto.Statistics"
+                            "$ref": "#/definitions/domain.Statistics"
                         }
                     }
                 }
@@ -101,14 +98,13 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "dto.Statistics": {
+        "domain.Statistics": {
             "type": "object",
             "properties": {
                 "hits": {
                     "type": "integer"
                 },
                 "int1": {
-                    "description": "Int1  int    ` + "`" + `form:\"int1\" json:\"int1\" binding:\"required,gte=1,lte=100,gtfield=Int2\"` + "`" + ` /*  */",
                     "type": "integer"
                 },
                 "int2": {

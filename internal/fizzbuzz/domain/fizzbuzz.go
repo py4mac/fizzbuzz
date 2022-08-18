@@ -4,6 +4,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strings"
+
+	"github.com/py4mac/fizzbuzz/pkg/x/errorx"
 )
 
 const (
@@ -11,12 +14,13 @@ const (
 )
 
 var (
-	ErrFizzbuzzIntsMustBePositive  = errors.New("int1 and int2 must be positives")
-	ErrFizzbuzzLimitMustBePositive = errors.New("limit must be positive")
-	ErrFizzbuzzLimitExceeded       = errors.New("limit must be below or equal 100")
+	ErrFizzbuzzIntsMustBePositive       = errors.New("int1 and int2 must be positives")
+	ErrFizzbuzzInt2MustBeHigherThanInt1 = errors.New("int2 must be higher than int1")
+	ErrFizzbuzzLimitMustBePositive      = errors.New("limit must be positive")
+	ErrFizzbuzzLimitExceeded            = errors.New("limit must be below or equal 100")
 )
 
-// FizzbuzReq structs holds query parameters for the rest endpoint
+// FizzbuzReq holds query parameters for the rest endpoint
 type Fizzbuz struct {
 	Int1  int    `query:"int1" json:"int1"`
 	Int2  int    `query:"int2" json:"int2"`
@@ -25,35 +29,37 @@ type Fizzbuz struct {
 	Str2  string `query:"str2" json:"str2"`
 }
 
-func (f *Fizzbuz) validate() error {
-	if f.Int1 < 0 || f.Int2 < 0 {
+// validate fizzbuzz struct fields
+func (f Fizzbuz) validate() error {
+	if f.Int1 <= 0 || f.Int2 <= 0 {
 		return ErrFizzbuzzIntsMustBePositive
 	}
 
-	if f.Limit < 0 {
+	if f.Int2 <= f.Int1 {
+		return ErrFizzbuzzInt2MustBeHigherThanInt1
+	}
+
+	if f.Limit <= 0 {
 		return ErrFizzbuzzLimitMustBePositive
 	}
 
 	if f.Limit > MaxLimit {
-		return ErrFizzbuzzLimitMustBePositive
+		return ErrFizzbuzzLimitExceeded
 	}
 
 	return nil
 }
 
-func (f *Fizzbuz) Process(ctx context.Context) ([]string, error) {
+// Process serialize fizzbuzz struct
+func (f Fizzbuz) Process(ctx context.Context) (string, error) {
 	if err := f.validate(); err != nil {
-		return nil, err
+		return "", errorx.Wrap(err, "validation error")
 	}
 
 	response := make([]string, f.Limit)
 
 	for i := 0; i < f.Limit; i++ {
 		number := i + 1
-
-		if ctx.Err() != nil {
-			return nil, ctx.Err()
-		}
 
 		switch {
 		case (number%f.Int1 == 0) && (number%f.Int2 == 0):
@@ -67,5 +73,5 @@ func (f *Fizzbuz) Process(ctx context.Context) ([]string, error) {
 		}
 	}
 
-	return response, nil
+	return strings.Join(response, ","), nil
 }

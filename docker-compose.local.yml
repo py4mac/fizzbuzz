@@ -21,7 +21,7 @@ services:
     container_name: prometheus
     restart: unless-stopped
     volumes:
-        - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+        - ./monitoring/prometheus.local.yml:/etc/prometheus/prometheus.yml
     ports:
         - "9090:9090"
   
@@ -56,3 +56,4 @@ services:
 
 volumes:
   pg_data:
+  
