@@ -33,13 +33,10 @@ func init() {
 	flag.StringVar(&config.CfgFile, "config", pflagx.LookupEnvOrString("CONFIG", "/app/config.yaml"), "Fizzbuzz microservice config path")
 }
 
-// @title Go Fizzbuzz REST API
-// @version 1.0
+// @title 		Go Fizzbuzz REST API
+// @version 	1.0
 // @description Fizzbuzz REST API
-// @contact.name Pierre-Yves BOISBUNON
-// @contact.url https://github.com/py4mac
-// @contact.email pierreyves.boisbunon@gmail.com
-// @BasePath /api/v1
+// @BasePath  	/api/v1
 func main() {
 	flag.Parse()
 	log.SetFormatter(&log.JSONFormatter{})

@@ -16,42 +16,39 @@ definitions:
         type: string
     type: object
 info:
-  contact:
-    email: pierreyves.boisbunon@gmail.com
-    name: Pierre-Yves BOISBUNON
-    url: https://github.com/py4mac
+  contact: {}
   description: Fizzbuzz REST API
   title: Go Fizzbuzz REST API
   version: "1.0"
 paths:
-  /api/v1/fizzbuzz:
+  /fizzbuzz:
     get:
       consumes:
       - application/json
       description: Record fizzbuzz handler
       parameters:
       - description: Integer1
-        in: formData
+        in: query
         name: int1
         required: true
         type: integer
       - description: Integer2
-        in: formData
+        in: query
         name: int2
         required: true
         type: integer
       - description: Limit
-        in: formData
+        in: query
         name: limit
         required: true
         type: integer
       - description: String1
-        in: formData
+        in: query
         name: str1
         required: true
         type: string
       - description: String2
-        in: formData
+        in: query
         name: str2
         required: true
         type: string
@@ -62,10 +59,14 @@ paths:
           description: OK
           schema:
             type: string
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
       summary: Record
       tags:
-      - v1
-  /api/v1/stats:
+      - fizzbuzz
+  /stats:
     get:
       description: Process status handler
       produces:
@@ -75,7 +76,9 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/domain.Statistics'
+        "500":
+          description: Internal Server Error
       summary: Process
       tags:
-      - v1
+      - fizzbuzz
 swagger: "2.0"

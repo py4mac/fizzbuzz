@@ -20,19 +20,21 @@ func NewV1Handlers(uc fizzbuzz.UseCase) fizzbuzz.Handlers {
 	return &v1Handlers{uc: uc}
 }
 
-// Create godoc
-// @Summary Record
-// @Description Record fizzbuzz handler
-// @Tags v1
-// @Accept json
-// @Produce json
-// @Success 200 {object} string
-// @Param int1 formData int true "Integer1" 1
-// @Param int2 formData int true "Integer2" 1
-// @Param limit formData int true "Limit" 100
-// @Param str1 formData string true "String1" "fizz"
-// @Param str2 formData string true "String2" "buzz"
-// @Router /api/v1/fizzbuzz [get]
+// Record godoc
+// @Summary 		Record
+// @Description 	Record fizzbuzz handler
+// @Tags 			fizzbuzz
+// @Accept 			json
+// @Produce 		json
+// @Success 		200 {object} string
+// @Failure      	400
+// @Failure      	500
+// @Param 			int1 query int true "Integer1" 1
+// @Param 			int2 query int true "Integer2" 1
+// @Param 			limit query int true "Limit" 100
+// @Param 			str1 query string true "String1" "fizz"
+// @Param 			str2 query string true "String2" "buzz"
+// @Router 			/fizzbuzz [get]
 func (h v1Handlers) Record() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		ctx, span := otel.Tracer("").Start(c.Request().Context(), "v1Handlers.Record")
@@ -52,13 +54,14 @@ func (h v1Handlers) Record() echo.HandlerFunc {
 	}
 }
 
-// Update godoc
-// @Summary Process
-// @Description Process status handler
-// @Tags v1
-// @Produce json
-// @Success 200 {object} domain.Statistics
-// @Router /api/v1/stats [get]
+// Process godoc
+// @Summary 		Process
+// @Description 	Process status handler
+// @Tags 			fizzbuzz
+// @Produce 		json
+// @Success 		200 {object} domain.Statistics
+// @Failure      	500
+// @Router 			/stats [get]
 func (h v1Handlers) Process() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var response *domain.Statistics

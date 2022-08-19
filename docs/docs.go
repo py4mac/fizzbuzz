@@ -10,17 +10,13 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {
-            "name": "Pierre-Yves BOISBUNON",
-            "url": "https://github.com/py4mac",
-            "email": "pierreyves.boisbunon@gmail.com"
-        },
+        "contact": {},
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/v1/fizzbuzz": {
+        "/fizzbuzz": {
             "get": {
                 "description": "Record fizzbuzz handler",
                 "consumes": [
@@ -30,7 +26,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "v1"
+                    "fizzbuzz"
                 ],
                 "summary": "Record",
                 "parameters": [
@@ -38,35 +34,35 @@ const docTemplate = `{
                         "type": "integer",
                         "description": "Integer1",
                         "name": "int1",
-                        "in": "formData",
+                        "in": "query",
                         "required": true
                     },
                     {
                         "type": "integer",
                         "description": "Integer2",
                         "name": "int2",
-                        "in": "formData",
+                        "in": "query",
                         "required": true
                     },
                     {
                         "type": "integer",
                         "description": "Limit",
                         "name": "limit",
-                        "in": "formData",
+                        "in": "query",
                         "required": true
                     },
                     {
                         "type": "string",
                         "description": "String1",
                         "name": "str1",
-                        "in": "formData",
+                        "in": "query",
                         "required": true
                     },
                     {
                         "type": "string",
                         "description": "String2",
                         "name": "str2",
-                        "in": "formData",
+                        "in": "query",
                         "required": true
                     }
                 ],
@@ -76,18 +72,24 @@ const docTemplate = `{
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
                 }
             }
         },
-        "/api/v1/stats": {
+        "/stats": {
             "get": {
                 "description": "Process status handler",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "v1"
+                    "fizzbuzz"
                 ],
                 "summary": "Process",
                 "responses": {
@@ -96,6 +98,9 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/domain.Statistics"
                         }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
                 }
             }
