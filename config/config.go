@@ -2,9 +2,6 @@
 package config
 
 import (
-	"errors"
-	"flag"
-	"os"
 	"path/filepath"
 	"strings"
 	"time"
@@ -13,21 +10,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-var configPath string
-
-// LookupEnvOrString adds the capability to get env instead of param flag
-func LookupEnvOrString(key string, defaultVal string) string {
-	if val, ok := os.LookupEnv(key); ok {
-		return val
-	}
-
-	return defaultVal
-}
-
-// init predefined flag for passing configuration file
-func init() {
-	flag.StringVar(&configPath, "config", LookupEnvOrString("CONFIG", "/data/etc/config.yaml"), "Fizzbuzz microservice config path")
-}
+var CfgFile string
 
 // Config is application struct
 type Config struct {
@@ -68,18 +51,14 @@ type Jaeger struct {
 
 // InitConfig loads yaml configuration file
 func InitConfig() (*Config, error) {
-	if configPath == "" {
-		return nil, errors.New("config path is not set")
-	}
-
-	base := filepath.Base(configPath)
-	ext := filepath.Ext(configPath)
+	base := filepath.Base(CfgFile)
+	ext := filepath.Ext(CfgFile)
 
 	cfg := &Config{}
 
 	viper.SetConfigName(strings.TrimSuffix(base, filepath.Ext(base)))
 	viper.SetConfigType(strings.TrimLeft(ext, "."))
-	viper.AddConfigPath(filepath.Dir(configPath))
+	viper.AddConfigPath(filepath.Dir(CfgFile))
 	viper.AddConfigPath(".")
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 	viper.AutomaticEnv()

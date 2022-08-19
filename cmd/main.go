@@ -2,6 +2,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 
 	"github.com/opentracing/opentracing-go"
@@ -9,12 +10,18 @@ import (
 	"github.com/py4mac/fizzbuzz/internal/server"
 	"github.com/py4mac/fizzbuzz/pkg/constants"
 	"github.com/py4mac/fizzbuzz/pkg/postgres"
+	"github.com/py4mac/fizzbuzz/pkg/x/pflagx"
 	log "github.com/sirupsen/logrus"
 	"github.com/uber/jaeger-client-go"
 	jaegercfg "github.com/uber/jaeger-client-go/config"
 	jaegerlog "github.com/uber/jaeger-client-go/log"
 	"github.com/uber/jaeger-lib/metrics"
 )
+
+// init predefined flag for passing configuration file
+func init() {
+	flag.StringVar(&config.CfgFile, "config", pflagx.LookupEnvOrString("CONFIG", "/app/config.yaml"), "Fizzbuzz microservice config path")
+}
 
 // @title Go Fizzbuzz REST API
 // @version 1.0
@@ -24,6 +31,7 @@ import (
 // @contact.email pierreyves.boisbunon@gmail.com
 // @BasePath /api/v1
 func main() {
+	flag.Parse()
 	log.SetFormatter(&log.JSONFormatter{})
 	log.SetLevel(log.DebugLevel)
 
