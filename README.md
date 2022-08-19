@@ -47,7 +47,7 @@ The following tools are required to be installed on local machine.
 These other stacks are already pre-installed inside differents containers. No installation is required here, it's just for information.
 
 [PostgreSQL](https://github.com/jackc/pgx) as fizzbuzz persistent store<br/>
-[Jaeger](https://www.jaegertracing.io/) for tracing (https://opentracing.io/)<br/>
+[Opentelemetry](https://opentelemetry.io/) for tracing<br/>
 [Prometheus](https://prometheus.io/) monitoring and alerting<br/>
 [Grafana](https://grafana.com/) to expose dashboards collecting Prometheus metrics<br/>
 [Echo](https://github.com/labstack/echo) web framework<br/>

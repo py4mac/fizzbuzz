@@ -16,5 +16,5 @@ metrics:
   ServiceName: api
 
 jaeger:
-  Host: api:6831
+  Host: http://api:14268/api/traces
   ServiceName: fuzzbuzz

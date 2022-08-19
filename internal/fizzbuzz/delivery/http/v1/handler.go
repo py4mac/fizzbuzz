@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/opentracing/opentracing-go"
+	"go.opentelemetry.io/otel"
 
 	"github.com/py4mac/fizzbuzz/internal/fizzbuzz"
 	"github.com/py4mac/fizzbuzz/internal/fizzbuzz/domain"
@@ -35,8 +35,8 @@ func NewV1Handlers(uc fizzbuzz.UseCase) fizzbuzz.Handlers {
 // @Router /api/v1/fizzbuzz [get]
 func (h v1Handlers) Record() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		span, ctx := opentracing.StartSpanFromContext(c.Request().Context(), "v1Handlers.Record")
-		defer span.Finish()
+		ctx, span := otel.Tracer("").Start(c.Request().Context(), "v1Handlers.Record")
+		defer span.End()
 
 		n := new(domain.Fizzbuz)
 		if err := c.Bind(n); err != nil {
@@ -63,8 +63,8 @@ func (h v1Handlers) Process() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var response *domain.Statistics
 
-		span, ctx := opentracing.StartSpanFromContext(c.Request().Context(), "v1Handlers.Process")
-		defer span.Finish()
+		ctx, span := otel.Tracer("").Start(c.Request().Context(), "v1Handlers.Process")
+		defer span.End()
 
 		response, err := h.uc.Process(ctx)
 		if err != nil {
