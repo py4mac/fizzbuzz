@@ -1,20 +1,20 @@
 server:
-  Port: :8000
-  ReadTimeout: 5
-  WriteTimeout: 5
+  port: :8000
+  readTimeout: 5
+  writeTimeout: 5
 
 postgres:
-  Host: postgres
-  Port: 5432
-  User: postgres
-  Password: admin
-  Dbname: fizzbuzz
-  PgDriver: pgx
+  host: postgres
+  port: 5432
+  user: postgres
+  password: admin
+  dbname: fizzbuzz
+  pgDriver: pgx
 
 metrics:
-  Url: 0.0.0.0:8080
-  ServiceName: api
+  url: 0.0.0.0:8080
+  serviceName: api
 
 jaeger:
-  Host: http://api:14268/api/traces
-  ServiceName: fuzzbuzz
+  host: http://api:14268/api/traces
+  serviceName: fizzbuzz

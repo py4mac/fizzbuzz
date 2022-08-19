@@ -16,8 +16,8 @@ var CfgFile string
 type Config struct {
 	Server   ServerConfig
 	Postgres PostgresConfig
-	Metrics  Metrics
-	Jaeger   Jaeger
+	Metrics  MetricsConfig
+	Jaeger   JaegerConfig
 }
 
 // ServerConfig is server configuration structure
@@ -37,14 +37,14 @@ type PostgresConfig struct {
 	PgDriver string
 }
 
-// Metrics is prometheus configuration structure
-type Metrics struct {
+// MetricsConfig is prometheus configuration structure
+type MetricsConfig struct {
 	URL         string
 	ServiceName string
 }
 
-// Jaeger is tracing configuration structure
-type Jaeger struct {
+// JaegerConfig is tracing configuration structure
+type JaegerConfig struct {
 	Host        string
 	ServiceName string
 }
