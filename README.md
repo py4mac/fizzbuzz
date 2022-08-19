@@ -1,6 +1,7 @@
-<H1>Go Fizzbuzz implementation with PostgreSQL</H1>
+# Go Fizzbuzz implementation with PostgreSQL
 
-# Project details
+[![Test](https://github.com/py4mac/fizzbuzz/workflows/Test/badge.svg)](https://github.com/py4mac/fizzbuzz/releases/latest)
+[![codecov](https://codecov.io/gh/py4mac/fizzbuzz/branch/main/graph/badge.svg)](https://codecov.io/gh/py4mac/fizzbuzz)
 
 Exercise: Write a simple fizz-buzz REST server.
 
@@ -86,7 +87,7 @@ Onece PostgreSQL container is running, the following command initialize the data
 
 Once local containers and local application is started, the following endpoints are availables.
 
-## Swagger UI
+## Swagger
 
 It exposes RestAPI handlers
 http://localhost:8000/swagger/index.html
@@ -129,15 +130,15 @@ Content-Length: 70
 
 http://localhost:8080/metrics
 
-## Jaeger UI
+## Jaeger
 
 http://localhost:16686
 
-## Prometheus UI
+## Prometheus
 
 http://localhost:9090
 
-## Grafana UI
+## Grafana
 
 http://localhost:3000/d/3bB90wi4z/fizzbuzz
 
@@ -147,7 +148,7 @@ http://localhost:3000/d/3bB90wi4z/fizzbuzz
 ❯ make stop_local
 ```
 
-# Setup production environnement
+# Setup production environment
 
 ### Run production containers
 
@@ -163,12 +164,17 @@ and database migration script
 
 # Services availables
 
-Once production containers are started, the same services are started with the API. The same endpoints are also availables.
+Once production containers are started, the same services are started. The same endpoints are also availables.
 
-# Source code documentaiton
+# Source code documentation
 
 An other command is available to explore live documentation
 
 ```sh
 ❯ make doc
 ```
+
+TODO
+
+- add build status
+- add coverage value

@@ -28,5 +28,4 @@ WORKDIR /app
 COPY --from=builder /app/fizzbuzz .
 USER 1001:1001
 
-RUN ls /app
 ENTRYPOINT ["/app/fizzbuzz"]

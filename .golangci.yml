@@ -1,47 +1,23 @@
-linters:
-  disable-all: true
-  enable:
-    - bodyclose
-    - deadcode
-    - depguard
-    - dogsled
-    - dupl
-    - errcheck
-    - exportloopref
-    - exhaustive
-    - goconst
-    - gocritic
-    - gofmt
-    - goimports
-    - gomnd
-    - gocyclo
-    - gosec
-    - gosimple
-    - govet
-    - ineffassign
-    - misspell
-    - nolintlint
-    - nakedret
-    - prealloc
-    - predeclared
-    - revive
-    - staticcheck
-    - stylecheck
-    - thelper
-    - tparallel
-    - typecheck
-    - unconvert
-    - unparam
-    - varcheck
-    - whitespace
-    - wsl
+run:
+  go: '1.19'
+  timeout: 2m
 
 issues:
+  max-same-issues: 0
   exclude-rules:
     - text: "G112:"
       linters:
         - gosec
-run:
-  issues-exit-code: 1
-  skip-dirs:
-    - pgdata
+
+linters:
+  disable-all: true
+  enable:
+    - gofmt
+    - goimports
+    - gocyclo
+    - govet
+    - gosec
+    - ineffassign
+    - staticcheck
+    - stylecheck
+    - unused
