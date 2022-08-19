@@ -173,8 +173,3 @@ An other command is available to explore live documentation
 ```sh
 ❯ make doc
 ```
-
-TODO
-
-- add build status
-- add coverage value
