@@ -35,7 +35,7 @@ func NewV1Handlers(uc fizzbuzz.UseCase) fizzbuzz.Handlers {
 // @Param			str1 query string true "String1" "fizz"
 // @Param			str2 query string true "String2" "buzz"
 // @Router			/fizzbuzz [get]
-func (h v1Handlers) Record() echo.HandlerFunc {
+func (h *v1Handlers) Record() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		ctx, span := otel.Tracer("").Start(c.Request().Context(), "v1Handlers.Record")
 		defer span.End()
@@ -62,7 +62,7 @@ func (h v1Handlers) Record() echo.HandlerFunc {
 // @Success			200 {object} domain.Statistics
 // @Failure			500
 // @Router			/stats [get]
-func (h v1Handlers) Process() echo.HandlerFunc {
+func (h *v1Handlers) Process() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var response *domain.Statistics
 

@@ -30,7 +30,7 @@ type Fizzbuz struct {
 }
 
 // validate fizzbuzz struct fields
-func (f Fizzbuz) validate() error {
+func (f *Fizzbuz) validate() error {
 	if f.Int1 <= 0 || f.Int2 <= 0 {
 		return ErrFizzbuzzIntsMustBePositive
 	}
@@ -51,7 +51,7 @@ func (f Fizzbuz) validate() error {
 }
 
 // Process serialize fizzbuzz struct
-func (f Fizzbuz) Process(ctx context.Context) (string, error) {
+func (f *Fizzbuz) Process(ctx context.Context) (string, error) {
 	if err := f.validate(); err != nil {
 		return "", errorx.Wrap(err, "validation error")
 	}
