@@ -10,8 +10,8 @@ import (
 	"github.com/py4mac/fizzbuzz/config"
 )
 
-// NewPsqlDB returns a new Postgresql db instance
-func NewPsqlDB(c *config.Config) (*sqlx.DB, error) {
+// NewPgClient returns a new Postgresql db instance
+func NewPgClient(c *config.Config) (*sqlx.DB, error) {
 	dataSourceName := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s",
 		c.Postgres.Host,
 		c.Postgres.Port,

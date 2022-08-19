@@ -20,7 +20,7 @@ import (
 func (s *Server) MapHandlers(e *echo.Echo) error {
 	metrics, err := metric.NewPrometheusMetric(s.cfg.Metrics.URL, s.cfg.Metrics.ServiceName)
 	if err != nil {
-		logger.Errorf("CreateMetrics Error: %s", err)
+		logger.Errorf("NewPrometheusMetric Error: %s", err)
 	}
 
 	logger.Info(
@@ -57,7 +57,7 @@ func (s *Server) MapHandlers(e *echo.Echo) error {
 
 	apiV1 := e.Group("/api/v1")
 
-	v1.MapFbRoutes(apiV1, v1Handlers)
+	v1.MapV1Routes(apiV1, v1Handlers)
 
 	return nil
 }

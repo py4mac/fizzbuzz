@@ -49,14 +49,14 @@ func main() {
 		panic(err)
 	}
 
-	psqlDB, err := postgres.NewPsqlDB(cfg)
+	pgClient, err := postgres.NewPgClient(cfg)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Postgresql init: %s", err.Error()))
 		panic(err)
 	} else {
-		logger.Infof("Postgres connected, Status: %#v", psqlDB.Stats())
+		logger.Infof("Postgres connected")
 	}
-	defer psqlDB.Close()
+	defer pgClient.Close()
 
 	tp, err := tracing.NewTracing(cfg)
 	if err != nil {
@@ -70,7 +70,7 @@ func main() {
 
 	logger.Info("Otel connected")
 
-	s := server.NewServer(cfg, psqlDB)
+	s := server.NewServer(cfg, pgClient)
 	if err = s.Run(); err != nil {
 		log.Error(fmt.Sprintf("server error %s", err.Error()))
 		panic(err)
