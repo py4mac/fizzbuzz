@@ -172,20 +172,3 @@ An other command is available to explore live documentation
 ```sh
 ❯ make doc
 ```
-
-# TODO
-
-- [] Test
-  - [x] Generate mock
-  - [x] Complete validate params sequence
-  - [x] Fix fizzbuzz return value should be a single string a not an array
-  - [x] Errors cleanup
-  - [] Unittest
-  - [] Integration test?
-- [] Documentation
-  - [x] Cleanup readme.md
-  - [] Code cleanup
-  - [x] Godoc internal?
-- [] Build
-  - [] Cleanup golangci linter
-  - [] Generate vendor folder
