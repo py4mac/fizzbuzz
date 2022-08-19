@@ -26,14 +26,14 @@ doc:
 # Swagger https://github.com/swaggo/swag
 
 swagger:
-	echo "Starting swagger generating"
-	swag init -g **/**/*.go
+	$(info Starting swagger generating)
+	swag init --dir=cmd,internal/fizzbuzz/domain,internal/fizzbuzz/delivery/http/v1 cmd/main.go
 
 # ==============================================================================
 # Run
 
 run:
-	echo "Running application"
+	$(info Running application)
 	go run ./cmd/main.go --config=./config.local.yaml
 
 
@@ -41,19 +41,19 @@ run:
 # Docker compose commands
 
 start_local:
-	echo "Starting docker local environment"
+	$(info Starting docker local environment)
 	docker-compose -f docker-compose.local.yml up -d
 
 stop_local:
-	echo "Stopping docker local environment"
+	$(info Stopping docker local environment)
 	docker-compose -f docker-compose.local.yml stop
 
 start_prod:
-	echo "Starting docker production environment"
+	$(info Starting docker production environment)
 	docker-compose -f docker-compose.yml up --build -d
 
 stop_prod:
-	echo "Stopping docker production environment"
+	$(info Stopping docker production environment)
 	docker-compose -f docker-compose.yml stop
 
 # ==============================================================================
