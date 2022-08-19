@@ -10,7 +10,11 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "contact": {
+            "name": "Pierre-Yves BOISBUNON",
+            "url": "https://github.com/py4mac",
+            "email": "pierreyves.boisbunon@gmail.com"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -126,12 +130,12 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
+	Version:          "1.0",
 	Host:             "",
-	BasePath:         "",
+	BasePath:         "/api/v1",
 	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Title:            "Go Fizzbuzz REST API",
+	Description:      "Fizzbuzz REST API",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }

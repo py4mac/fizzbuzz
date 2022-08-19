@@ -1,3 +1,4 @@
+basePath: /api/v1
 definitions:
   domain.Statistics:
     properties:
@@ -15,7 +16,13 @@ definitions:
         type: string
     type: object
 info:
-  contact: {}
+  contact:
+    email: pierreyves.boisbunon@gmail.com
+    name: Pierre-Yves BOISBUNON
+    url: https://github.com/py4mac
+  description: Fizzbuzz REST API
+  title: Go Fizzbuzz REST API
+  version: "1.0"
 paths:
   /api/v1/fizzbuzz:
     get:

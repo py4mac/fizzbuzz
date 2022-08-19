@@ -1,8 +1,16 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "Fizzbuzz REST API",
+        "title": "Go Fizzbuzz REST API",
+        "contact": {
+            "name": "Pierre-Yves BOISBUNON",
+            "url": "https://github.com/py4mac",
+            "email": "pierreyves.boisbunon@gmail.com"
+        },
+        "version": "1.0"
     },
+    "basePath": "/api/v1",
     "paths": {
         "/api/v1/fizzbuzz": {
             "get": {
