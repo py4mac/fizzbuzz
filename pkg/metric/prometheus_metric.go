@@ -19,8 +19,8 @@ type PrometheusMetrics struct {
 	Times     *prometheus.HistogramVec
 }
 
-// Create metrics with address and name, fit Metrics interface
-func CreateMetrics(address, name string) (Metrics, error) {
+// NewPrometheusMetric create a new prometheus metric
+func NewPrometheusMetric(address, name string) (Metrics, error) {
 	var metr PrometheusMetrics
 	metr.HitsTotal = prometheus.NewCounter(prometheus.CounterOpts{
 		Name: name + "_hits_total",

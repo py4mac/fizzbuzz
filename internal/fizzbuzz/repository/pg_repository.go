@@ -9,14 +9,17 @@ import (
 	"github.com/py4mac/fizzbuzz/pkg/x/errorx"
 )
 
+// fbInPg holds internal structure for postgres repository
 type fbInPg struct {
 	db *sqlx.DB
 }
 
+// NewFBInPg return instance of postgres repository fiting Repository interface
 func NewFBInPg(db *sqlx.DB) fizzbuzz.Repository {
 	return &fbInPg{db: db}
 }
 
+// Record a fizzbuzz object into postgres repository
 func (f *fbInPg) Record(ctx context.Context, e *domain.Fizzbuz) (string, error) {
 	if _, err := f.db.ExecContext(
 		ctx,
@@ -33,14 +36,22 @@ func (f *fbInPg) Record(ctx context.Context, e *domain.Fizzbuz) (string, error) 
 	return e.Process(ctx)
 }
 
+// Process compute statistic based on postgres db content
 func (f *fbInPg) Process(ctx context.Context) (*domain.Statistics, error) {
-	var int1, int2, limit int
+	var (
+		int1, int2, limit, count int
+		str1, str2               string
+	)
 
-	var str1, str2 string
-
-	var count int
-
-	if err := f.db.QueryRowContext(ctx, getStats).Scan(&int1, &int2, &limit, &str1, &str2, &count); err != nil {
+	if err := f.db.QueryRowContext(ctx, getStats).
+		Scan(
+			&int1,
+			&int2,
+			&limit,
+			&str1,
+			&str2,
+			&count,
+		); err != nil {
 		return nil, errorx.Wrap(err, "db process error")
 	}
 

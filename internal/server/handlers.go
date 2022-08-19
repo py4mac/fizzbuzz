@@ -18,7 +18,7 @@ import (
 
 // Map Server Handlers
 func (s *Server) MapHandlers(e *echo.Echo) error {
-	metrics, err := metric.CreateMetrics(s.cfg.Metrics.URL, s.cfg.Metrics.ServiceName)
+	metrics, err := metric.NewPrometheusMetric(s.cfg.Metrics.URL, s.cfg.Metrics.ServiceName)
 	if err != nil {
 		logger.Errorf("CreateMetrics Error: %s", err)
 	}

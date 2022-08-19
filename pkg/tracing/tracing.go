@@ -1,4 +1,4 @@
-// Package tracing holds jaeger implementation
+// Package tracing holds jaeger implementation for otel
 package tracing
 
 import (

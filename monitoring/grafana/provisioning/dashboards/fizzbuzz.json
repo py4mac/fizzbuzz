@@ -407,7 +407,7 @@
           "refId": "A"
         }
       ],
-      "title": "Fuzzbuzz responses time (ms)",
+      "title": "Fizzbuzz responses time (ms)",
       "type": "timeseries"
     },
     {
@@ -505,7 +505,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Fuzzbuzz",
+  "title": "Fizzbuzz",
   "uid": "3bB90wi4z",
   "version": 1
 }

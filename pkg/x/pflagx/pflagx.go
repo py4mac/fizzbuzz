@@ -1,3 +1,4 @@
+// Package pflagx provide utils functions to manage input flags
 package pflagx
 
 import "os"

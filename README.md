@@ -139,7 +139,7 @@ http://localhost:9090
 
 ## Grafana UI
 
-http://localhost:3000/d/3bB90wi4z/fuzzbuzz
+http://localhost:3000/d/3bB90wi4z/fizzbuzz
 
 ## Stop local containers
 
@@ -188,5 +188,4 @@ An other command is available to explore live documentation
   - [x] Godoc internal?
 - [] Build
   - [] Cleanup golangci linter
-  - [] Remove Jaeger?
   - [] Generate vendor folder
