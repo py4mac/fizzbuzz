@@ -14,7 +14,8 @@ const (
 )
 
 var (
-	ErrFizzbuzzIntsMustBePositive       = errors.New("int1 and int2 must be positives")
+	ErrFizzbuzzInt1MustBePositive       = errors.New("int1 must be positive")
+	ErrFizzbuzzInt2MustBePositive       = errors.New("int2 must be positive")
 	ErrFizzbuzzInt2MustBeHigherThanInt1 = errors.New("int2 must be higher than int1")
 	ErrFizzbuzzLimitMustBePositive      = errors.New("limit must be positive")
 	ErrFizzbuzzLimitExceeded            = fmt.Errorf("limit must be below or equal %d", MaxLimit)
@@ -31,8 +32,12 @@ type Fizzbuz struct {
 
 // validate fizzbuzz struct fields
 func (f *Fizzbuz) validate() error {
-	if f.Int1 <= 0 || f.Int2 <= 0 {
-		return ErrFizzbuzzIntsMustBePositive
+	if f.Int1 <= 0 {
+		return ErrFizzbuzzInt1MustBePositive
+	}
+
+	if f.Int2 <= 0 {
+		return ErrFizzbuzzInt2MustBePositive
 	}
 
 	if f.Int2 <= f.Int1 {

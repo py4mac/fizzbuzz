@@ -4,7 +4,7 @@ package postgres
 import (
 	"fmt"
 
-	_ "github.com/jackc/pgx/stdlib" // pgx driver
+	_ "github.com/jackc/pgx/stdlib"
 	"github.com/jmoiron/sqlx"
 
 	"github.com/py4mac/fizzbuzz/config"

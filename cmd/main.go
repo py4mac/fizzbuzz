@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/py4mac/fizzbuzz/config"
+	delivery "github.com/py4mac/fizzbuzz/internal/fizzbuzz/delivery/http"
 	v1 "github.com/py4mac/fizzbuzz/internal/fizzbuzz/delivery/http/v1"
 	"github.com/py4mac/fizzbuzz/internal/fizzbuzz/repository"
 	"github.com/py4mac/fizzbuzz/internal/fizzbuzz/usecase"
@@ -77,7 +78,7 @@ func main() {
 	// Tracing
 	tp, err := tracing.NewTracing(cfg)
 	if err != nil {
-		log.Error(fmt.Sprintf("cannot create tracer %s", err.Error()))
+		logger.Error(fmt.Sprintf("cannot create tracer %s", err.Error()))
 		panic(err)
 	}
 
@@ -93,14 +94,14 @@ func main() {
 	// Init handlers
 	v1Handlers := v1.NewV1Handlers(fbUC)
 	apiV1 := s.NewGroup("/api/v1")
-	v1.MapV1Routes(apiV1, v1Handlers)
+	delivery.MapRoutes(apiV1, v1Handlers)
 
 	go func() {
 		if err = s.Run(); err != nil {
 			if err == http.ErrServerClosed {
-				log.Info("Shuting down server")
+				logger.Info("Shuting down server")
 			} else {
-				log.Error(fmt.Sprintf("server error %s", err.Error()))
+				logger.Error(fmt.Sprintf("server error %s", err.Error()))
 				panic(err)
 			}
 		}

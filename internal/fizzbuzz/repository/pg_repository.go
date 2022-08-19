@@ -57,7 +57,7 @@ func (f *fbInPg) Process(ctx context.Context) (*domain.Statistics, error) {
 
 	return &domain.Statistics{
 		Hits: int32(count),
-		Fizzbuz: domain.Fizzbuz{
+		Fizzbuz: &domain.Fizzbuz{
 			Int1:  int1,
 			Int2:  int2,
 			Limit: limit,

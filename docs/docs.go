@@ -18,7 +18,7 @@ const docTemplate = `{
     "paths": {
         "/fizzbuzz": {
             "get": {
-                "description": "Record fizzbuzz handler",
+                "description": "Record request inside persistent repository and returns a list of strings with numbers from 1 to limit, where: all multiples of int1 are replaced by str1, all multiples of int2 are replaced by str2, all multiples of int1 and int2 are replaced by str1str2",
                 "consumes": [
                     "application/json"
                 ],
@@ -26,9 +26,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "fizzbuzz"
+                    "Fizzbuzz"
                 ],
-                "summary": "Record",
+                "summary": "Record and compute request",
                 "parameters": [
                     {
                         "type": "integer",
@@ -84,14 +84,14 @@ const docTemplate = `{
         },
         "/stats": {
             "get": {
-                "description": "Process status handler",
+                "description": "Return the most used request, as well as the number of hits for this request",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "fizzbuzz"
+                    "Fizzbuzz"
                 ],
-                "summary": "Process",
+                "summary": "Process the most frequent request",
                 "responses": {
                     "200": {
                         "description": "OK",

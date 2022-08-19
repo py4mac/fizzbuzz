@@ -8,6 +8,7 @@ import (
 
 	"github.com/py4mac/fizzbuzz/internal/fizzbuzz"
 	"github.com/py4mac/fizzbuzz/internal/fizzbuzz/domain"
+	"github.com/py4mac/fizzbuzz/pkg/x/errorx"
 )
 
 // v1Handlers handlers
@@ -20,10 +21,10 @@ func NewV1Handlers(uc fizzbuzz.UseCase) fizzbuzz.Handlers {
 	return &v1Handlers{uc: uc}
 }
 
-// Record godoc
-// @Summary			Record
-// @Description		Record fizzbuzz handler
-// @Tags			fizzbuzz
+// Fizzbuzz godoc
+// @Summary			Record and compute request
+// @Description		Record request inside persistent repository and returns a list of strings with numbers from 1 to limit, where: all multiples of int1 are replaced by str1, all multiples of int2 are replaced by str2, all multiples of int1 and int2 are replaced by str1str2
+// @Tags			Fizzbuzz
 // @Accept			json
 // @Produce			json
 // @Success			200 {object} string
@@ -42,7 +43,7 @@ func (h *v1Handlers) Record() echo.HandlerFunc {
 
 		n := new(domain.Fizzbuz)
 		if err := c.Bind(n); err != nil {
-			return c.JSON(http.StatusBadRequest, err.Error())
+			return c.JSON(http.StatusBadRequest, errorx.Wrap(err, "wrong parameters").Error())
 		}
 
 		response, err := h.uc.Record(ctx, n)
@@ -54,10 +55,10 @@ func (h *v1Handlers) Record() echo.HandlerFunc {
 	}
 }
 
-// Process godoc
-// @Summary			Process
-// @Description		Process status handler
-// @Tags			fizzbuzz
+// Stats godoc
+// @Summary			Process the most frequent request
+// @Description		Return the most used request, as well as the number of hits for this request
+// @Tags			Fizzbuzz
 // @Produce			json
 // @Success			200 {object} domain.Statistics
 // @Failure			500

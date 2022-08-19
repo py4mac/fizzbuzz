@@ -25,7 +25,10 @@ paths:
     get:
       consumes:
       - application/json
-      description: Record fizzbuzz handler
+      description: 'Record request inside persistent repository and returns a list
+        of strings with numbers from 1 to limit, where: all multiples of int1 are
+        replaced by str1, all multiples of int2 are replaced by str2, all multiples
+        of int1 and int2 are replaced by str1str2'
       parameters:
       - description: Integer1
         in: query
@@ -63,12 +66,13 @@ paths:
           description: Bad Request
         "500":
           description: Internal Server Error
-      summary: Record
+      summary: Record and compute request
       tags:
-      - fizzbuzz
+      - Fizzbuzz
   /stats:
     get:
-      description: Process status handler
+      description: Return the most used request, as well as the number of hits for
+        this request
       produces:
       - application/json
       responses:
@@ -78,7 +82,7 @@ paths:
             $ref: '#/definitions/domain.Statistics'
         "500":
           description: Internal Server Error
-      summary: Process
+      summary: Process the most frequent request
       tags:
-      - fizzbuzz
+      - Fizzbuzz
 swagger: "2.0"

@@ -11,7 +11,7 @@ import (
 	echoSwagger "github.com/swaggo/echo-swagger"
 
 	"github.com/py4mac/fizzbuzz/config"
-	"github.com/py4mac/fizzbuzz/docs"
+	_ "github.com/py4mac/fizzbuzz/docs"
 )
 
 // Server struct
@@ -42,14 +42,11 @@ func (s *Server) Run() error {
 
 	s.echo.Use(metricsMiddleware())
 
-	// Setup swagger doc
-	docs.SwaggerInfo.Title = "Fizzbuzz REST API"
-
 	s.echo.GET("/swagger/*", echoSwagger.WrapHandler)
 
 	// Setup Health Endpoint
 	s.echo.GET("/health", func(c echo.Context) error {
-		return c.JSON(http.StatusOK, map[string]string{"status": "OK"})
+		return c.JSON(http.StatusOK, map[string]string{})
 	})
 
 	// Run metrics

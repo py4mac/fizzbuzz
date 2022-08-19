@@ -43,7 +43,7 @@ func TestFbUC_Process(t *testing.T) {
 
 	statExpected := &domain.Statistics{
 		Hits: 10,
-		Fizzbuz: domain.Fizzbuz{
+		Fizzbuz: &domain.Fizzbuz{
 			Int1:  3,
 			Int2:  5,
 			Limit: 10,

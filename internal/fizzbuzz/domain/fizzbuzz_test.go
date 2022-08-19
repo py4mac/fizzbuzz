@@ -11,7 +11,8 @@ func TestValidate(t *testing.T) {
 		in   *Fizzbuz
 		want error
 	}{
-		{&Fizzbuz{-1, -1, 10, "fizz", "buzz"}, ErrFizzbuzzIntsMustBePositive},
+		{&Fizzbuz{-1, -1, 10, "fizz", "buzz"}, ErrFizzbuzzInt1MustBePositive},
+		{&Fizzbuz{1, -1, 10, "fizz", "buzz"}, ErrFizzbuzzInt2MustBePositive},
 		{&Fizzbuz{2, 1, 10, "fizz", "buzz"}, ErrFizzbuzzInt2MustBeHigherThanInt1},
 		{&Fizzbuz{1, 2, 0, "fizz", "buzz"}, ErrFizzbuzzLimitMustBePositive},
 		{&Fizzbuz{1, 2, 101, "fizz", "buzz"}, ErrFizzbuzzLimitExceeded},
