@@ -2,7 +2,10 @@
 package tracing
 
 import (
+	"fmt"
+
 	"github.com/py4mac/fizzbuzz/config"
+	"github.com/py4mac/fizzbuzz/pkg/constants"
 	"go.opentelemetry.io/otel/exporters/jaeger"
 	"go.opentelemetry.io/otel/sdk/resource"
 	tracesdk "go.opentelemetry.io/otel/sdk/trace"
@@ -11,7 +14,8 @@ import (
 
 // NewTracing return TraceProvider instance
 func NewTracing(cfg *config.Config) (*tracesdk.TracerProvider, error) {
-	exp, err := jaeger.New(jaeger.WithCollectorEndpoint(jaeger.WithEndpoint(cfg.Jaeger.Host)))
+	endpoint := fmt.Sprintf("http://%s:%s/api/traces", cfg.Jaeger.Host, cfg.Jaeger.Port)
+	exp, err := jaeger.New(jaeger.WithCollectorEndpoint(jaeger.WithEndpoint(endpoint)))
 	if err != nil {
 		return nil, err
 	}
@@ -20,7 +24,7 @@ func NewTracing(cfg *config.Config) (*tracesdk.TracerProvider, error) {
 		tracesdk.WithBatcher(exp),
 		tracesdk.WithResource(resource.NewWithAttributes(
 			semconv.SchemaURL,
-			semconv.ServiceNameKey.String(cfg.Jaeger.ServiceName),
+			semconv.ServiceNameKey.String(constants.Name),
 		)),
 	)
 

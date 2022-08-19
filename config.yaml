@@ -1,7 +1,5 @@
 server:
   port: :8000
-  readTimeout: 5
-  writeTimeout: 5
 
 postgres:
   host: postgres
@@ -9,12 +7,10 @@ postgres:
   user: postgres
   password: admin
   dbname: fizzbuzz
-  pgDriver: pgx
 
 metrics:
-  url: 0.0.0.0:8080
-  serviceName: api
+  port: :8080
 
 jaeger:
-  host: http://jaeger:14268/api/traces
-  serviceName: fizzbuzz
+  host: jaeger
+  port: 14268

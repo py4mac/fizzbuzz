@@ -6,8 +6,8 @@ import (
 	"github.com/py4mac/fizzbuzz/internal/fizzbuzz"
 )
 
-// MapFbRoutes maps fizzbuzz routes to their corresponding handlers
-func MapFbRoutes(newsGroup *echo.Group, h fizzbuzz.Handlers) {
-	newsGroup.GET("/fizzbuzz", h.Record())
-	newsGroup.GET("/stats", h.Process())
+// MapV1Routes maps fizzbuzz routes to their corresponding handlers
+func MapV1Routes(v1Group *echo.Group, h fizzbuzz.Handlers) {
+	v1Group.GET("/fizzbuzz", h.Record())
+	v1Group.GET("/stats", h.Process())
 }

@@ -4,7 +4,6 @@ package config
 import (
 	"path/filepath"
 	"strings"
-	"time"
 
 	"github.com/py4mac/fizzbuzz/pkg/x/errorx"
 	"github.com/spf13/viper"
@@ -22,9 +21,7 @@ type Config struct {
 
 // ServerConfig is server configuration structure
 type ServerConfig struct {
-	Port         string
-	ReadTimeout  time.Duration
-	WriteTimeout time.Duration
+	Port string
 }
 
 // PostgresConfig is postgres configuration structure
@@ -34,19 +31,17 @@ type PostgresConfig struct {
 	User     string
 	Password string
 	Dbname   string
-	PgDriver string
 }
 
 // MetricsConfig is prometheus configuration structure
 type MetricsConfig struct {
-	URL         string
-	ServiceName string
+	Port string
 }
 
 // JaegerConfig is tracing configuration structure
 type JaegerConfig struct {
-	Host        string
-	ServiceName string
+	Host string
+	Port string
 }
 
 // InitConfig loads yaml configuration file

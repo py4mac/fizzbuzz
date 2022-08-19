@@ -10,6 +10,10 @@ import (
 	"github.com/py4mac/fizzbuzz/config"
 )
 
+const (
+	driverName = "pgx"
+)
+
 // NewPgClient returns a new Postgresql db instance
 func NewPgClient(c *config.Config) (*sqlx.DB, error) {
 	dataSourceName := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s",
@@ -20,7 +24,7 @@ func NewPgClient(c *config.Config) (*sqlx.DB, error) {
 		c.Postgres.Password,
 	)
 
-	db, err := sqlx.Connect(c.Postgres.PgDriver, dataSourceName)
+	db, err := sqlx.Connect(driverName, dataSourceName)
 	if err != nil {
 		return nil, err
 	}

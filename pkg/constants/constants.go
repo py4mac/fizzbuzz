@@ -2,6 +2,9 @@
 package constants
 
 const (
+	// Application name
+	Name = "fizzbuzz"
+
 	// Version microservice version
 	Version = ""
 

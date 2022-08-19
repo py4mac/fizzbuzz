@@ -2,17 +2,30 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
+	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"github.com/py4mac/fizzbuzz/config"
-	"github.com/py4mac/fizzbuzz/internal/server"
+	v1 "github.com/py4mac/fizzbuzz/internal/fizzbuzz/delivery/http/v1"
+	"github.com/py4mac/fizzbuzz/internal/fizzbuzz/repository"
+	"github.com/py4mac/fizzbuzz/internal/fizzbuzz/usecase"
 	"github.com/py4mac/fizzbuzz/pkg/constants"
-	"github.com/py4mac/fizzbuzz/pkg/postgres"
+	"github.com/py4mac/fizzbuzz/pkg/db/postgres"
+	"github.com/py4mac/fizzbuzz/pkg/server"
 	"github.com/py4mac/fizzbuzz/pkg/tracing"
 	"github.com/py4mac/fizzbuzz/pkg/x/pflagx"
 	log "github.com/sirupsen/logrus"
 	"go.opentelemetry.io/otel"
+)
+
+var (
+	ctxTimeout = 10
 )
 
 // init predefined flag for passing configuration file
@@ -37,7 +50,7 @@ func main() {
 	})
 
 	logger.Info(
-		"serve fizzbuzz",
+		"Fizzbuzz",
 		" Version:", constants.Version,
 		" Built:", constants.Built,
 		" Revision:", constants.Revision,
@@ -58,6 +71,13 @@ func main() {
 	}
 	defer pgClient.Close()
 
+	// Init repositories
+	fbRepo := repository.NewFBInPg(pgClient)
+
+	// Init useCases
+	fbUC := usecase.NewFBUseCase(fbRepo)
+
+	// Tracing
 	tp, err := tracing.NewTracing(cfg)
 	if err != nil {
 		log.Error(fmt.Sprintf("cannot create tracer %s", err.Error()))
@@ -70,9 +90,34 @@ func main() {
 
 	logger.Info("Otel connected")
 
+	// Server
 	s := server.NewServer(cfg, pgClient)
-	if err = s.Run(); err != nil {
-		log.Error(fmt.Sprintf("server error %s", err.Error()))
-		panic(err)
-	}
+
+	// Init handlers
+	v1Handlers := v1.NewV1Handlers(fbUC)
+	apiV1 := s.NewGroup("/api/v1")
+	v1.MapV1Routes(apiV1, v1Handlers)
+
+	go func() {
+		if err = s.Run(); err != nil {
+			if err == http.ErrServerClosed {
+				log.Info("Shuting down server")
+			} else {
+				log.Error(fmt.Sprintf("server error %s", err.Error()))
+				panic(err)
+			}
+		}
+	}()
+
+	logger.Printf("Server is running on port: %s", cfg.Server.Port)
+
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
+	<-quit
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(ctxTimeout)*time.Second)
+	defer cancel()
+
+	logger.Info("Server Exited Properly")
+
+	_ = s.Stop(ctx)
 }
