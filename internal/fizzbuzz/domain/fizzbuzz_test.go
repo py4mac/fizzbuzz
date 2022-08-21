@@ -8,22 +8,22 @@ import (
 
 func TestValidate(t *testing.T) {
 	var tests = []struct {
-		in   *Fizzbuz
-		want error
+		in      *Fizzbuz
+		wantErr bool
 	}{
-		{&Fizzbuz{-1, -1, 10, "fizz", "buzz"}, ErrFizzbuzzInt1MustBePositive},
-		{&Fizzbuz{1, -1, 10, "fizz", "buzz"}, ErrFizzbuzzInt2MustBePositive},
-		{&Fizzbuz{2, 1, 10, "fizz", "buzz"}, ErrFizzbuzzInt2MustBeHigherThanInt1},
-		{&Fizzbuz{1, 2, 0, "fizz", "buzz"}, ErrFizzbuzzLimitMustBePositive},
-		{&Fizzbuz{1, 2, 101, "fizz", "buzz"}, ErrFizzbuzzLimitExceeded},
-		{&Fizzbuz{1, 2, 10, "fizz", "buzz"}, nil},
+		{&Fizzbuz{-1, -1, 10, "fizz", "buzz"}, true},
+		{&Fizzbuz{1, -1, 10, "fizz", "buzz"}, true},
+		{&Fizzbuz{2, 1, 10, "fizz", "buzz"}, true},
+		{&Fizzbuz{1, 2, 0, "fizz", "buzz"}, true},
+		{&Fizzbuz{1, 2, 101, "fizz", "buzz"}, true},
+		{&Fizzbuz{1, 2, 10, "fizz", "buzz"}, false},
 	}
 
 	for i, tc := range tests {
 		t.Run(fmt.Sprintf("%d", i), func(t *testing.T) {
-			got := tc.in.validate()
-			if got != tc.want {
-				t.Fatalf("got %v; want %v", got, tc.want)
+			got := tc.in.validate(context.Background())
+			if tc.wantErr != (got != nil) {
+				t.Fatalf("got error %v; but expected no error", got)
 			} else {
 				t.Logf("Success !")
 			}
